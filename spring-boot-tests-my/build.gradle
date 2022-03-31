@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group 'org.springframework.boot'
+version '2.5.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+//    compile project(':spring-boot-project:spring-boot-parent')
+//    compile project(':spring-boot-project:spring-boot-starters:spring-boot-starter')
+//    compile project(':spring-boot-project:spring-boot-starters:spring-boot-starter-web')
+
+    // 1、api用于替代compile
+    // 2、platform表示：声明对平台的依赖。如果目标坐标代表多个潜在组件，则将选择平台组件，而不是库。
+    api(enforcedPlatform(project(':spring-boot-project:spring-boot-parent')))
+    api(project(':spring-boot-project:spring-boot-starters:spring-boot-starter'))
+    api(project(':spring-boot-project:spring-boot-starters:spring-boot-starter-web'))
+}
+
+
+test {
+    useJUnitPlatform()
+}
